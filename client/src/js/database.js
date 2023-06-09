@@ -13,7 +13,7 @@ const initdb = async () =>
   });
 
 // Method that accepts some content and adds it to the database
-export const putDb = async (content) => {
+export const putDb = async (content,id) => {
   const jateDb = await openDB("jate", 1);
   if (!jateDb) {
     console.error("Database has not been initialized.");
@@ -22,11 +22,13 @@ export const putDb = async (content) => {
 
   const tx = jateDb.transaction("jate", "readwrite");
   const store = tx.objectStore("jate");
-  await store.add({ content });
+  await store.put({id: id, value: content});
   await tx.done;
 
   console.log("Content added to the jate database.");
 };
+
+
 //Add logic for a method that gets all the content from the database
 export const getDb = async () => {
 

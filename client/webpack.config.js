@@ -2,12 +2,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
 const { InjectManifest } = require("workbox-webpack-plugin");
-const { GenerateSW } = require('workbox-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 
 module.exports = () => {
   return {
-    mode: "production",
+    mode: "development",
     // Entry point for files
     entry: {
       main: "./src/js/index.js",
@@ -24,12 +24,13 @@ module.exports = () => {
         template: "./index.html",
         title: "J.A.T.E. - Just Another Text Editor",
       }),
+      new WorkboxPlugin.GenerateSW(),
       // Injects our custom service worker
       new InjectManifest({
         swSrc: "./src-sw.js",
-        swDest: "src-sw.js",
+        swDest: "./src-sw.js",
       }),
-      new GenerateSW(),
+    
       // Creates a manifest.json file.
       new WebpackPwaManifest({
         fingerprints: false,
