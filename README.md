@@ -22,11 +22,16 @@ This is a text editor named J.A.T.E. It is project meant to help me understand P
 
 ## Installation <a id="installation"></a>
 
-Clone the repo to your local machine. Open the project in an editor like VS Code. Run `npm run install` in the terminal while in the root directory. Then, run `npm run build` to build the project. Then, run `npm run start` to start the server. Open a browser and navigate to http://localhost:3000 to access the editor and use it.
+1. Clone the repo to your local machine. 
+2. Open the project in an editor like VS Code. 
+3. Run `npm run install` in the terminal while in the root directory to install dependencies.
+4. Run `npm run build` to build the project. 
+5. Run `npm run start` to start the server. 
+6. Open a browser and navigate to http://localhost:3000 to access the editor and use it.
 
 ## Usage <a id="usage"></a>
 
-Just another text editor.
+Use this PWA to take and save notes.
 
 ## Contributions <a id="contributions"></a>
 
@@ -68,7 +73,7 @@ The following technologies were used to develop J.A.T.E. - Just Another Text Edi
 
 <strong>Other</strong>
 
-- Node.js, Webpack
+- Node.js, Webpack, Express.js
 <br>
     
 ## Collaborators <a id="collaborators"></a>
