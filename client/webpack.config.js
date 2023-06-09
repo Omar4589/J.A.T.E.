@@ -23,6 +23,7 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: "./index.html",
         title: "J.A.T.E. - Just Another Text Editor",
+        inject: 'body', // inject the generated script tags at the bottom
       }),
       new WorkboxPlugin.GenerateSW(),
       // Injects our custom service worker
