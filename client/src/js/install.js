@@ -1,36 +1,33 @@
-const butInstall = document.getElementById('buttonInstall');
-let deferredPrompt;
+const butInstall = document.getElementById("buttonInstall");
 
-// Add an event handler to the `beforeinstallprompt` event
-window.addEventListener('beforeinstallprompt', (event) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    event.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = event;
-    // Update UI notify the user they can add to home screen
-    butInstall.style.display = 'block';
+// Logic for installing the PWA
+window.addEventListener("beforeinstallprompt", (event) => {
+  // Store the triggered events
+  window.deferredPrompt = event;
+
+  // Remove the hidden class from the button.
+  butInstall.classList.toggle("hidden", false);
 });
 
+//Implement a click event handler on the `butInstall` element
+butInstall.addEventListener("click", async () => {
+  const promptEvent = window.deferredPrompt;
 
-// Implement a click event handler on the `butInstall` element
-butInstall.addEventListener('click', async () => {
-    // Hide our user interface that shows our A2HS button
-    butInstall.style.display = 'none';
-    // Show the prompt
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        // Wait for the user to respond to the prompt
-        const choiceResult = await deferredPrompt.userChoice;
-        if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
-        } else {
-            console.log('User dismissed the A2HS prompt');
-        }
-        deferredPrompt = null;
-    }
+  if (!promptEvent) {
+    return;
+  }
+
+  // Show prompt
+  promptEvent.prompt();
+
+  // Reset the deferred prompt variable, it can only be used once.
+  window.deferredPrompt = null;
+
+  butInstall.classList.toggle("hidden", true);
 });
 
-// Add a handler for the `appinstalled` event
-window.addEventListener('appinstalled', (event) => {
-    console.log('App installed successfully!', event);
+//Add an handler for the `appinstalled` event
+window.addEventListener("appinstalled", (event) => {
+  // Clear prompt
+  window.deferredPrompt = null;
 });
